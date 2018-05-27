@@ -1,0 +1,311 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>i-Met</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <!-- VENDOR CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='vendor/bootstrap/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='vendor/font-awesome/css/font-awesome.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='vendor/linearicons/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='vendor/chartist/css/chartist-custom.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <!-- MAIN CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <!--Theme Responsive css-->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/responsive.css') }}"/>
+    <!-- FOR DEMO PURPOSES ONLY. You should remove this in your project -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/demo.css') }}">
+    <!-- GOOGLE FONTS -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700" rel="stylesheet">
+    <!-- ICONS -->
+    <link rel="apple-touch-icon" sizes="76x76" href="{{ url_for('static', filename='images/icon.png') }}">
+    <link rel="icon" type="image/png" sizes="96x96" href="{{ url_for('static', filename='images/icon.png') }}">
+</head>
+<body data-spy="scroll" data-target=".navbar-collapse">
+<!-- Preloader -->
+<div id="loading">
+    <div id="loading-center">
+        <div id="loading-center-absolute">
+            <div class="object" id="object_one"></div>
+            <div class="object" id="object_two"></div>
+            <div class="object" id="object_three"></div>
+            <div class="object" id="object_four"></div>
+        </div>
+    </div>
+</div>
+<!--End off Preloader -->
+<!-- WRAPPER -->
+<div id="wrapper">
+    <form method="post" action="{{ url_for('user') }}">
+
+        <!-- NAVBAR -->
+        <nav class="navbar navbar-default navbar-fixed-top">
+            <div class="navbar-header">
+                <a class="" href="{{ url_for('index') }}">
+                    <img src="{{ url_for('static', filename='images/icon.png') }}" class="logo logo2" alt="">
+                </a>
+            </div>
+            <div class="container-fluid">
+                <div id="navbar-menu">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="">
+                            <a href="{{ url_for('index') }}">
+                                <h5>Головна сторінка</h5>
+                            </a>
+                        </li>
+                        <li class="dropdown-1">
+                            <a href="{{ url_for('user_cabinet') }}" class="dropdown-toggle icon-menu"
+                               data-toggle="dropdown">
+                                <i class="lnr lnr-alarm"></i>
+                                <span class="badge bg-danger">1</span>
+                            </a>
+                            <ul class="dropdown-1-content dropdown-menu notifications">
+                                <li><a href="{{ url_for('user_cabinet') }}" class="notification-item"><span
+                                        class="dot bg-warning"></span>Перевищено добову норму використання води.</a>
+                                </li>
+                                <li><a href="{{ url_for('user_cabinet') }}" class="more">Переглянути сповіщення</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown-1">
+                            <a href="{{ url_for('user_cabinet') }}" class="dropdown-toggle" data-toggle="dropdown"><img
+                                    src="{{ url_for('static', filename='images/user.png') }}" class="img-circle"
+                                    alt="Avatar"> <span>Петро</span> <i
+                                    class="icon-submenu lnr lnr-chevron-down"></i></a>
+                            <ul class="dropdown-1-content">
+                                <li>
+                                    <button href="{{ url_for('index') }}" name="exit" type="submit" value="exit"><i
+                                            class="lnr lnr-exit"></i>
+                                        <span>Вийти</span></button>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </form>
+    <!-- END NAVBAR -->
+    <!-- LEFT SIDEBAR -->
+    <div id="sidebar-nav" class="sidebar">
+        <div class="sidebar-scroll">
+            <nav>
+                <ul class="nav">
+                    <li class="left-menu"><a href="{{ url_for('user_cabinet') }}"><i class="lnr lnr-home"></i> <span>Загальна</span></a>
+                    </li>
+                    <li class="left-menu"><a href="{{ url_for('gas') }}" class="active"><i
+                            class="lnr lnr-chart-bars"></i> <span>Облік газу</span></a></li>
+                    <li class="left-menu"><a href="{{ url_for('water') }}"><i class="lnr lnr-chart-bars"></i> <span>Облік води</span></a>
+                    </li>
+                    <li class="left-menu"><a href="{{ url_for('user') }}"><i class="lnr lnr-cog"></i>
+                        <span>Налаштування</span></a></li>
+
+                </ul>
+            </nav>
+        </div>
+    </div>
+    <!-- END LEFT SIDEBAR -->
+    <!-- MAIN -->
+    <div class="main">
+        <!-- MAIN CONTENT -->
+        <div class="main-content">
+            <div class="container-fluid">
+                <h3 class="page-title">Облік газу</h3>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="panel">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Line Chart</h3>
+                            </div>
+                            <div class="panel-body">
+                                <div id="demo-line-chart" class="ct-chart"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="panel">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Bar Chart</h3>
+                            </div>
+                            <div class="panel-body">
+                                <div id="demo-bar-chart" class="ct-chart"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- BASIC TABLE -->
+                <div class="panel">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Basic Table</h3>
+                    </div>
+                    <div class="panel-body">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>First Name</th>
+                                <th>Last Name</th>
+                                <th>Username</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>Steve</td>
+                                <td>Jobs</td>
+                                <td>@steve</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>Simon</td>
+                                <td>Philips</td>
+                                <td>@simon</td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>Jane</td>
+                                <td>Doe</td>
+                                <td>@jane</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!-- END BASIC TABLE -->
+            </div>
+        </div>
+        <!-- END MAIN CONTENT -->
+    </div>
+    <!-- END MAIN -->
+    <div class="clearfix"></div>
+    <footer class="footer bg-info p-top-20 p-bottom-30">
+        <div class="text-center">
+            <h4 class="text-white">© I-Met</h4>
+        </div>
+    </footer>
+</div>
+<!-- END WRAPPER -->
+<div class="scrollup">
+    <a href="{{ url_for('index') }}" class="hvr-hang"><span class="arrow_up">▲</span></a>
+</div>
+<!-- JS includes -->
+<script src="{{ url_for('static', filename='js/vendor/jquery-1.11.2.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/vendor/bootstrap.js') }}"></script>
+<script src="{{ url_for('static', filename='js/jquery.easing.1.3.js') }}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.touchswipe/1.6.18/jquery.touchSwipe.min.js"></script>
+<script src="{{ url_for('static', filename='js/bootsnav.js') }}"></script>
+<script src="{{ url_for('static', filename='js/jquery.formchimp.js') }}"></script>
+<script src="{{ url_for('static', filename='js/plugins.js') }}"></script>
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+
+<!-- Javascript -->
+<!-- <script src="assets/vendor/jquery/jquery.min.js">
+</script>-->
+
+<script src="{{ url_for('static', filename='vendor/bootstrap/js/bootstrap.min.js') }}"></script>
+<script src="{{ url_for('static', filename='vendor/jquery-slimscroll/jquery.slimscroll.min.js') }}"></script>
+<script src="{{ url_for('static', filename='vendor/jquery.easy-pie-chart/jquery.easypiechart.min.js') }}"></script>
+<script src="{{ url_for('static', filename='vendor/chartist/js/chartist.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/common.js') }}"></script>
+<script>
+    $(function () {
+        var options;
+
+        var data = {
+            labels: [{% for item in labels %}
+                "{{item}}",
+            {% endfor %}],
+            series: [
+                [{% for item in values %}
+                    {{item}},
+                {% endfor %}]
+            ]
+        };
+
+        // line chart
+        options = {
+            height: "300px",
+            showPoint: true,
+            axisX: {
+                showGrid: false
+            },
+            lineSmooth: false,
+        };
+
+        new Chartist.Line('#demo-line-chart', data, options);
+
+        // bar chart
+        options = {
+            height: "300px",
+            axisX: {
+                showGrid: false
+            },
+        };
+
+        new Chartist.Bar('#demo-bar-chart', data, options);
+
+
+        // area chart
+        options = {
+            height: "270px",
+            showArea: true,
+            showLine: false,
+            showPoint: false,
+            axisX: {
+                showGrid: false
+            },
+            lineSmooth: false,
+        };
+
+        new Chartist.Line('#demo-area-chart', data, options);
+
+
+        // multiple chart
+        var data = {
+            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+            series: [{
+                name: 'series-real',
+                data: [200, 380, 350, 320, 410, 450, 570, 400, 555, 620, 750, 900],
+            },
+                {
+                    name: 'series-projection',
+                    data: [240, 350, 360, 380, 400, 450, 480, 523, 555, 600, 700, 800],
+                }
+            ]
+        };
+
+        var options = {
+            fullWidth: true,
+            lineSmooth: false,
+            height: "270px",
+            low: 0,
+            high: 'auto',
+            series: {
+                'series-projection': {
+                    showArea: true,
+                    showPoint: false,
+                    showLine: false
+                },
+            },
+            axisX: {
+                showGrid: false,
+
+            },
+            axisY: {
+                showGrid: false,
+                onlyInteger: true,
+                offset: 0,
+            },
+            chartPadding: {
+                left: 20,
+                right: 20
+            }
+        };
+
+        new Chartist.Line('#multiple-chart', data, options);
+
+    });
+</script>
+</body>
+</html>

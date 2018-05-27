@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <title>i-Met</title>
+    <meta name="description" content="">
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/icon.ico') }}">
+
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/font-awesome.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/form-elements.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles-login-page.css') }}">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+
+    <!--Theme Responsive css-->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/responsive.css') }}"/>
+    <link rel="apple-touch-icon" sizes="76x76" href="{{ url_for('static', filename='images/icon.png') }}">
+    <link rel="icon" type="image/png" sizes="96x96" href="{{ url_for('static', filename='images/icon.png') }}">
+
+</head>
+
+<body>
+
+<!-- Top content -->
+<div class="top-content">
+{#    <form method="post" action="{{ url_for('register') }}">#}
+        <div class="inner-bg">
+            <div class="container">
+
+
+                <div class="row m-bottom-m-20">
+                    <div class="col-sm-8 col-sm-offset-2 text m-botton-">
+                        <h1><strong>І-MET</strong> реєстрація </h1>
+                        <p>
+                            Створіть Ваш особистий кабінет
+                        </p>
+
+                    </div>
+                </div>
+                <div class="col-sm-8 col-sm-offset-2 m-top-m-20">
+                    <div class="form-box">
+                        <div class="form-top">
+                            <div class="form-top-left">
+                                <h3>Реєстрація</h3>
+                                <p>Заповніть форму нижче:</p>
+                            </div>
+                            <div class="form-top-right">
+                                <i class="fa fa-pencil"></i>
+                            </div>
+                        </div>
+                        <div class="form-bottom">
+                            <form role="form" action="{{ url_for('register') }}" method="post" class="registration-form">
+                                <div class="form-group">
+                                    <label class="sr-only" for="form-first-name">Ім'я</label>
+                                    <input type="text" name="form-first-name" placeholder="Ім'я"
+                                           class="form-first-name form-control" id="form-first-name">
+                                </div>
+                                <div class="form-group">
+                                    <label class="sr-only" for="form-last-name">Прізвище</label>
+                                    <input type="text" name="form-last-name" placeholder="Прізвище"
+                                           class="form-last-name form-control" id="form-last-name">
+                                </div>
+                                <div class="form-group">
+                                    <label class="sr-only" for="form-email">Email</label>
+                                    <input type="text" name="email" placeholder="Email"
+                                           class="form-email form-control"
+                                           id="email">
+                                </div>
+                                <div class="form-group">
+                                    <label class="sr-only" for="form-email">Пароль</label>
+                                    <input type="password" name="password" placeholder="Пароль"
+                                           class="form-email form-control" id="password">
+                                </div>
+                                <button type="submit" class="btn" name="buttons" value="sigh_up">Зареєструватися</button>
+                            </form>
+
+                        </div>
+                    </div>
+
+
+                    <div class="social-login">
+                        <h3>Зареєструватися за допомогою:</h3>
+                        <div class="social-login-buttons">
+                            <a class="btn btn-link-1 btn-link-1-facebook" href="#">
+                                <i class="fa fa-facebook"></i> Facebook
+                            </a>
+                            <a class="btn btn-link-1 btn-link-1-twitter" href="#">
+                                <i class="fa fa-twitter"></i> Twitter
+                            </a>
+                            <a class="btn btn-link-1 btn-link-1-google-plus" href="#">
+                                <i class="fa fa-google-plus"></i> Google Plus
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Footer -->
+            <footer>
+                <div class="container">
+                    <div class="row">
+
+                    </div>
+                </div>
+            </footer>
+
+            <!-- Javascript -->
+            <script src="{{ url_for('static', filename='js/jquery-1.11.1.min.js') }}"></script>
+            <script src="{{ url_for('static', filename='bootstrap/js/bootstrap.min.js') }}"></script>
+            <script src="{{ url_for('static', filename='js/jquery.backstretch.min.js') }}"></script>
+            <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
+
+            <!--[if lt IE 10]>
+            <script src="assets/js/placeholder.js"></script>
+        <![endif]-->
+        </div>
+{#    </form>#}
+</div>
+</body>
+
+</html>

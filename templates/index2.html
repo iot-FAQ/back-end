@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="{{ url_for('static', filename='images/favicon.ico') }}">
+
+    <title>Welcome to i-Met</title>
+
+    <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/floating-labels.css') }}" rel="stylesheet">
+</head>
+
+<body style="background-color: #090025">
+<form class="form-signin">
+    <div class="text-center mb-4">
+        <img class="mb-4" src="https://getbootstrap.com/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
+        <h1 class="h1 mb-3 font-weight-normal" style="color: #FF4081">i-Met</h1>
+        <p style="color: #FF4081">Вітаємо на сайті розумного "нерозумного" лічильника</p>
+    </div>
+
+    <a href="{{ url_for('login') }}" class="btn btn-lg btn-block" style="background-color: #FF4081; border: none; color: white" role="button">Увійти</a>
+    <a href="{{ url_for('register') }}" class="btn btn-lg btn-block" style="background-color: #FF4081; border: none; color: white" role="button">Зареєструватися</a>
+</form>
+</body>
+</html>

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>i-Met</title>
+    <meta name="description" content="">
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/icon.ico') }}">
+
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/font-awesome.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/form-elements.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles-login-page.css') }}">
+
+{#    <link rel="stylesheet" media="all" href="https://cdnjs.cloudflare.com/ajax/libs/authy-form-helpers/2.3/form.authy.min.css" data-turbolinks-track="reload" />#}
+{#    <script src="https://cdnjs.cloudflare.com/ajax/libs/authy-form-helpers/2.3/form.authy.min.js" data-turbolinks-track="reload"></script>#}
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+
+    <!--Theme Responsive css-->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/responsive.css') }}"/>
+    <link rel="apple-touch-icon" sizes="76x76" href="{{ url_for('static', filename='images/icon.png') }}">
+    <link rel="icon" type="image/png" sizes="96x96" href="{{ url_for('static', filename='images/icon.png') }}">
+
+</head>
+
+<body>
+<form action="{{ url_for('check') }}" accept-charset="UTF-8" method="post">
+    <!-- Top content -->
+    <div class="top-content">
+
+        <div class="inner-bg">
+            <div class="container">
+
+                <div class="row">
+                    <div class="col-sm-8 col-sm-offset-2 text">
+                        <h1><strong>І-MET</strong></h1>
+                        <div class="description">
+                            <p>
+                                Щоб зареєструватися вам потрібно ввести номер датчика та пароль та надати Ваш номер для
+                                автентифікації
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-6 col-sm-offset-3">
+
+                        <div class="form-box">
+                            <div class="form-top">
+                            </div>
+                            <div class="form-bottom">
+{#                                <form action="{{ url_for('check') }}" method="post">#}
+                                    <div class="form-group">
+                                        <label class="sr-only" for="form-username">Номер датчика</label>
+                                        <input type="text" name="form-username" placeholder="№ датчика"
+                                               class="form-username form-control" id="form-username">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="sr-only" for="form-password">Пароль</label>
+                                        <input type="password" name="form-password" placeholder="Пароль"
+                                               class="form-password form-control" id="form-password">
+                                    </div>
+{#                                    <div class="form-group">#}
+{#                                         <label class='sr-only' for="authy-countries">Country code:</label>#}
+{#                                         <select name="country_code" id="authy-countries" data-show-as="number"></select>#}
+{#                                    </div>#}
+                                    <div class="form-group">
+                                        <label class="sr-only" for="phone-number">Телефон</label>
+                                        <input type="tel" name="phone-number" placeholder="Телефон"
+                                               class="phone-number form-control" id="phone-number">
+                                    </div>
+                                    <button name="button" type="submit">Отримати код</button>
+{#                                </form>#}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- Footer -->
+                <footer>
+                    <div class="container">
+
+                    </div>
+                </footer>
+
+                <!-- Javascript -->
+                <script src="{{ url_for('static', filename='js/jquery-1.11.1.min.js') }}"></script>
+                <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+                <script src="{{ url_for('static', filename='js/jquery.backstretch.min.js') }}"></script>
+                <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
+
+                <!--[if lt IE 10]>
+            <script src="assets/js/placeholder.js"></script>
+        <![endif]-->
+            </div>
+        </div>
+    </div>
+</form>
+</body>
+
+</html>

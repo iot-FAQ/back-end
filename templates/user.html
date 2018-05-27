@@ -1,0 +1,300 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>i-Met</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <!-- VENDOR CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='vendor/bootstrap/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='vendor/font-awesome/css/font-awesome.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='vendor/linearicons/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='vendor/chartist/css/chartist-custom.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <!-- MAIN CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <!--Theme Responsive css-->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/responsive.css') }}"/>
+    <!-- FOR DEMO PURPOSES ONLY. You should remove this in your project -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/demo.css') }}">
+    <!-- GOOGLE FONTS -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700" rel="stylesheet">
+    <!-- ICONS -->
+    <link rel="apple-touch-icon" sizes="76x76" href="{{ url_for('static', filename='images/icon.png') }}">
+    <link rel="icon" type="image/png" sizes="96x96" href="{{ url_for('static', filename='images/icon.png') }}">
+</head>
+<body>
+<!-- Preloader -->
+<div id="loading">
+    <div id="loading-center">
+        <div id="loading-center-absolute">
+            <div class="object" id="object_one"></div>
+            <div class="object" id="object_two"></div>
+            <div class="object" id="object_three"></div>
+            <div class="object" id="object_four"></div>
+        </div>
+    </div>
+</div>
+<!--End off Preloader -->
+<!-- WRAPPER -->
+<div id="wrapper">
+    <form method="post" action="{{ url_for('user') }}">
+
+        <!-- NAVBAR -->
+        <nav class="navbar navbar-default navbar-fixed-top">
+            <!-- <div class="brand">
+               <a href="user-cabinet.html"><img src="assets/images/icon.png" alt="logo2" class="img-responsive logo2"></a>
+               </div> -->
+            <div class="navbar-header">
+                <a class="" href="{{ url_for('index') }}">
+                    <img src="{{ url_for('static', filename='images/icon.png') }}" class="logo logo2" alt="">
+                </a>
+            </div>
+            <div class="container-fluid">
+                <div id="navbar-menu">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="">
+                            <a href="{{ url_for('index') }}">
+                                <h5>Головна сторінка</h5>
+                            </a>
+                        </li>
+                        <li class="dropdown-1">
+                            <a href="{{ url_for('user_cabinet') }}" class="dropdown-toggle icon-menu"
+                               data-toggle="dropdown">
+                                <i class="lnr lnr-alarm"></i>
+                                <span class="badge bg-danger">1</span>
+                            </a>
+                            <ul class="dropdown-1-content dropdown-menu notifications">
+                                <li><a href="{{ url_for('user_cabinet') }}" class="notification-item"><span
+                                        class="dot bg-warning"></span>Перевищено добову норму використання води.</a>
+                                </li>
+                                <li><a href="{{ url_for('user_cabinet') }}" class="more">Переглянути сповіщення</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown-1">
+                            <a href="{{ url_for('user_cabinet') }}" class="dropdown-toggle" data-toggle="dropdown"><img
+                                    src="{{ url_for('static', filename='images/user.png') }}" class="img-circle"
+                                    alt="Avatar"> <span>Петро</span> <i
+                                    class="icon-submenu lnr lnr-chevron-down"></i></a>
+                            <ul class="dropdown-1-content">
+                                <li><button href="{{ url_for('index') }}" name="exit" type="submit" value="exit"><i class="lnr lnr-exit"></i>
+                                    <span>Вийти</span></button>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </form>
+    <!-- END NAVBAR -->
+    <!-- LEFT SIDEBAR -->
+    <div id="sidebar-nav" class="sidebar">
+        <div class="sidebar-scroll">
+            <nav>
+                <ul class="nav">
+                    <li class="left-menu"><a href="{{ url_for('user_cabinet') }}"><i class="lnr lnr-home"></i> <span>Загальна</span></a>
+                    </li>
+                    <li class="left-menu"><a href="{{ url_for('gas') }}"><i class="lnr lnr-chart-bars"></i> <span>Облік газу</span></a>
+                    </li>
+                    <li class="left-menu"><a href="{{ url_for('water') }}"><i class="lnr lnr-chart-bars"></i> <span>Облік води</span></a>
+                    </li>
+                    <li class="left-menu"><a href="{{ url_for('user') }}" class="active"><i class="lnr lnr-cog"></i>
+                        <span>Налаштування</span></a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+    <!-- END LEFT SIDEBAR -->
+    <!-- MAIN -->
+    <div class="main">
+        <!-- MAIN CONTENT -->
+        <div class="main-content">
+            <div class="container-fluid">
+                <div class="panel panel-profile">
+                    <div class="clearfix">
+                        <!-- LEFT COLUMN -->
+                        <div class="profile-left">
+                            <!-- PROFILE HEADER -->
+                            <div class="profile-header">
+                                <div class="overlay"></div>
+                                <div class="profile-main">
+                                    <img src="{{ url_for('static', filename='images/user.png') }}"
+                                         class="img-circle img-av" alt="Avatar">
+                                    <h3 class="name">Петро Петренко</h3>
+                                </div>
+                                <div class="profile-stat">
+                                    <div class="row">
+                                        <div class="col-md-6 stat-item">
+                                            2 <span>Контролери</span>
+                                        </div>
+                                        <div class="col-md-6 stat-item">
+                                            2 <span>місяці використання</span>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- END PROFILE HEADER -->
+
+
+                            <div class="text-center"><a href="page-profile.html#" class="btn btn-primary">Edit
+                                Profile</a></div>
+                        </div>
+                        <!-- END PROFILE DETAIL -->
+                    </div>
+                    <!-- END LEFT COLUMN -->
+                    <!-- RIGHT COLUMN -->
+                    <div class="profile-right">
+                        <h4 class="heading">Інформація</h4>
+
+                        <!-- TABBED CONTENT -->
+                        <div class="custom-tabs-line tabs-line-bottom left-aligned">
+                            <ul class="nav" role="tablist">
+                                <li class="active"><a href="page-profile.html#tab-bottom-left1" role="tab"
+                                                      data-toggle="tab">Recent Activity</a></li>
+                                <li><a href="page-profile.html#tab-bottom-left2" role="tab" data-toggle="tab">Контролери
+                                    <span class="badge">2</span></a></li>
+                            </ul>
+                        </div>
+                        <div class="tab-content">
+                            <div class="tab-pane fade in active" id="tab-bottom-left1">
+                                <ul class="list-unstyled activity-timeline">
+                                    <li>
+                                        <p>Логін: <a href="page-profile.html#">Admin</a></p>
+                                    </li>
+
+                                    <li>
+
+                                        <p>Пароль: <a href="page-profile.html#">admin</a></p>
+
+                                    </li>
+
+                                    <li>
+                                        <p>Загальна інформація 1 <a href="page-profile.html#">(щось)</a></p>
+
+                                    </li>
+                                </ul>
+                                <div class="margin-top-30 text-center"><a href="page-profile.html#"
+                                                                          class="btn btn-default">See all activity</a>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="tab-bottom-left2">
+                                <div class="table-responsive">
+                                    <table class="table project-table">
+                                        <thead>
+                                        <tr>
+                                            <th>Title</th>
+                                            <th>Progress</th>
+                                            <th>Leader</th>
+                                            <th>Status</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <td><a href="page-profile.html#">Spot Media</a></td>
+                                            <td>
+                                                <div class="progress">
+                                                    <div class="progress-bar" role="progressbar" aria-valuenow="60"
+                                                         aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
+                                                        <span>60% Complete</span>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td><img src="{{ url_for('static', filename='images/user2.png') }}"
+                                                     alt="Avatar" class="avatar img-circle"> <a
+                                                    href="page-profile.html#">Michael</a></td>
+                                            <td><span class="label label-success">ACTIVE</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="page-profile.html#">E-Commerce Site</a></td>
+                                            <td>
+                                                <div class="progress">
+                                                    <div class="progress-bar" role="progressbar" aria-valuenow="33"
+                                                         aria-valuemin="0" aria-valuemax="100" style="width: 33%;">
+                                                        <span>33% Complete</span>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td><img src="{{ url_for('static', filename='images/user1.png') }}"
+                                                     alt="Avatar" class="avatar img-circle"> <a
+                                                    href="page-profile.html#">Antonius</a></td>
+                                            <td><span class="label label-warning">PENDING</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="page-profile.html#">Project 123GO</a></td>
+                                            <td>
+                                                <div class="progress">
+                                                    <div class="progress-bar" role="progressbar" aria-valuenow="68"
+                                                         aria-valuemin="0" aria-valuemax="100" style="width: 68%;">
+                                                        <span>68% Complete</span>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td><img src="{{ url_for('static', filename='images/user1.png') }}"
+                                                     alt="Avatar" class="avatar img-circle"> <a
+                                                    href="page-profile.html#">Antonius</a></td>
+                                            <td><span class="label label-success">ACTIVE</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="page-profile.html#">Project 123GO</a></td>
+                                            <td>
+                                                <div class="progress">
+                                                    <div class="progress-bar" role="progressbar" aria-valuenow="68"
+                                                         aria-valuemin="0" aria-valuemax="100" style="width: 68%;">
+                                                        <span>68% Complete</span>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td><img src="{{ url_for('static', filename='images/user1.png') }}"
+                                                     alt="Avatar" class="avatar img-circle"> <a
+                                                    href="page-profile.html#">Antonius</a></td>
+                                            <td><span class="label label-success">ACTIVE</span></td>
+                                        </tr>
+
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- END TABBED CONTENT -->
+                    </div>
+                    <!-- END RIGHT COLUMN -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END MAIN CONTENT -->
+</div>
+<!-- END MAIN -->
+</div>
+<div class="clearfix"></div>
+<!--Footer section-->
+<footer class="footer  footer1 bg-info p-top-20 p-bottom-30">
+    <div class="text-center">
+        <h4 class="text-white">© I-Met</h4>
+    </div>
+</footer>
+
+<!-- END WRAPPER -->
+<div class="scrollup">
+    <a href="{{ url_for('index') }}" class="hvr-hang"><span class="arrow_up">▲</span></a>
+</div>
+<!-- JS includes -->
+<script src="{{ url_for('static', filename='js/vendor/jquery-1.11.2.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/vendor/bootstrap.js') }}"></script>
+<script src="{{ url_for('static', filename='js/jquery.easing.1.3.js') }}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.touchswipe/1.6.18/jquery.touchSwipe.min.js"></script>
+<script src="{{ url_for('static', filename='js/bootsnav.js') }}"></script>
+<script src="{{ url_for('static', filename='js/jquery.formchimp.js') }}"></script>
+<script src="{{ url_for('static', filename='js/plugins.js') }}"></script>
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+<!-- Javascript -->
+<!-- <script src="assets/vendor/jquery/jquery.min.js">
+   </script>-->
+<script src="{{ url_for('static', filename='vendor/bootstrap/js/bootstrap.min.js') }}"></script>
+<script src="{{ url_for('static', filename='vendor/jquery-slimscroll/jquery.slimscroll.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/common.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>i-Met</title>
+    <meta name="description" content="">
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/icon.ico') }}">
+
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/font-awesome.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/form-elements.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles-login-page.css') }}">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+
+    <!--Theme Responsive css-->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/responsive.css') }}"/>
+    <link rel="apple-touch-icon" sizes="76x76" href="{{ url_for('static', filename='images/icon.png') }}">
+    <link rel="icon" type="image/png" sizes="96x96" href="{{ url_for('static', filename='images/icon.png') }}">
+
+</head>
+
+<body>
+
+<!-- Top content -->
+<div class="top-content">
+    <form action="{{ url_for('login') }}" method="post">
+        <div class="inner-bg">
+            <div class="container">
+
+                <div class="row">
+                    <div class="col-sm-8 col-sm-offset-2 text">
+                        <h1><strong>І-MET</strong></h1>
+                        <div class="description">
+                            <p>
+                                Увійдіть у Ваш особистий кабінет
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-6 col-sm-offset-3">
+
+                        <div class="form-box">
+                            <div class="form-top">
+                                <div class="form-top-left">
+                                    <h3>Вхід</h3>
+                                    <p>Введіть email та пароль :</p>
+                                </div>
+                                <div class="form-top-right">
+                                    <i class="fa fa-key"></i>
+                                </div>
+                            </div>
+                            <div class="form-bottom">
+                                <form role="form" action="{{ url_for('login') }}" method="post" class="login-form">
+                                    <div class="form-group">
+                                        <label class="sr-only" for="email">Email</label>
+                                        <input type="text" name="email" placeholder="Email"
+                                               class="form-username form-control" id="email">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="sr-only" for="password">Пароль</label>
+                                        <input type="password" name="password" placeholder="Пароль"
+                                               class="form-password form-control" id="password">
+                                    </div>
+                                    <button type="submit" class="btn">Увійти</button>
+                                </form>
+                            </div>
+                        </div>
+
+                        <div class="social-login">
+                            <h3>...або увійдіть за допомогою:</h3>
+                            <div class="social-login-buttons">
+                                <a class="btn btn-link-1 btn-link-1-facebook" href="#">
+                                    <i class="fa fa-facebook"></i> Facebook
+                                </a>
+                                <a class="btn btn-link-1 btn-link-1-twitter" href="#">
+                                    <i class="fa fa-twitter"></i> Twitter
+                                </a>
+                                <a class="btn btn-link-1 btn-link-1-google-plus" href="#">
+                                    <i class="fa fa-google-plus"></i> Google Plus
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!-- Footer -->
+                    <footer>
+                        <div class="container">
+
+                        </div>
+                    </footer>
+
+                    <!-- Javascript -->
+                    <script src="{{ url_for('static', filename='js/jquery-1.11.1.min.js') }}"></script>
+                    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+                    <script src="{{ url_for('static', filename='js/jquery.backstretch.min.js') }}"></script>
+                    <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
+
+                    <!--[if lt IE 10]>
+            <script src="assets/js/placeholder.js"></script>
+        <![endif]-->
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+</body>
+
+</html>

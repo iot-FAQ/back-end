@@ -1,0 +1,485 @@
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <title>I-Met</title>
+    <meta name="description" content="">
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/icon.png') }}">
+
+    <!-- Google fonts links-->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+
+    <!--For Plugins external css-->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.css') }}">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/animate.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/fonticons.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/font-awesome.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/slick.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/slick-theme.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootsnav.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/plugins.css') }}">
+
+    <!--Theme custom css -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <!--<link rel="stylesheet" href="assets/css/colors/blue.css">-->
+
+    <!--Theme Responsive css-->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/responsive.css') }}"/>
+
+    <script src="{{ url_for('static', filename='js/vendor/modernizr-2.8.3-respond-1.4.2.min.js') }}"></script>
+
+</head>
+<body data-spy="scroll" data-target=".navbar-collapse">
+
+<!-- Preloader -->
+<div id="loading">
+    <div id="loading-center">
+        <div id="loading-center-absolute">
+            <div class="object" id="object_one"></div>
+            <div class="object" id="object_two"></div>
+            <div class="object" id="object_three"></div>
+            <div class="object" id="object_four"></div>
+        </div>
+    </div>
+</div><!--End off Preloader -->
+
+
+<!-- Navbar start -->
+<nav class="navbar navbar-default navbar-fixed white no-background bootsnav navbar-mobile">
+    <div class="call-us-area bg-info text-white">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6 col-xs-12">
+                    <div class="call-us-number">
+                        <ul class="list-inline">
+                            <li><span class="icon_mail_alt"></span> I-Met@gmail.com</li>
+
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-xs-12">
+                    <div class="call-us-text text-right">
+
+                        <a href="{{ url_for('check') }}" class="signin">Зареєструватись</a>
+                        <a href="{{ url_for('login') }}" class="signin">Увійти</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="hv2-main-menu-bg">
+
+        <div class="container">
+            <div class="row">
+                <div class="container">
+                    <div class="row">
+
+                        <!-- Start Header Navigation -->
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle" data-toggle="collapse"
+                                    data-target="#navbar-menu">
+                                <i class="fa fa-bars"></i>
+                            </button>
+                            <a class="navbar-brand" href="{{ url_for('index') }}">
+                                <img src="{{ url_for('static', filename='images/icon.png') }}"
+                                     class="logo logo1 logo-display" alt="">
+                                <img src="{{ url_for('static', filename='images/icon.png') }}"
+                                     class="logo logo2 logo-scrolled" alt="">
+                            </a>
+                        </div>
+                        <!-- End Header Navigation -->
+
+                        <!-- Collect the nav links, forms, and other content for toggling -->
+                        <div class="collapse navbar-collapse" id="navbar-menu">
+                            <ul class="nav navbar-nav navbar-right m-top-20" data-in="fadeIn" data-out="fadeOut">
+
+                                <li class="active"><a href="{{ url_for('index') }}">Головна</a></li>
+                                <li><a href="#product">Про проект</a></li>
+                                <li><a href="#service">Наші переваги</a></li>
+                                <li><a href="#featured">Про датчик</a></li>
+                                <li><a href="#main-product">Застосунок</a></li>
+                                <li><a href="#pricing">Вартість</a></li>
+                                <li><a href="#contacts">Контакти</a></li>
+                                <li><a href="{{ url }}">{{ name }}</a></li>
+                            </ul>
+                        </div><!-- /.navbar-collapse -->
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</nav> <!-- End off Nav -->
+
+
+<!--Home page style start-->
+<div class="culmn">
+
+
+    <section id="home" class="home ">
+        <div class="transit-01">
+            <img src="{{ url_for('static', filename='images/shape-01.png') }}" alt=""/>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="banner m-top-150 p-top-100">
+
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-10 col-md-offset-1">
+                                <div class="banner-text text-center m-top-20">
+                                    <h1 class="start text-white">I-MET</h1>
+                                    <p class="start text-black"> Пристрій, що зробить подання показників лічильників
+                                        святом!</p>
+                                    <a class="btn btn-default btn-round m-top-20" href="#product">Дізнатись більше</a>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section><!-- End off homev1 section -->
+
+    <!-- Product Section Start -->
+    <section id="product">
+        <figure id="product" class="product sections2 bg-white">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-10 col-lg-offset-2">
+                        <div class="head-title product-head">
+                            <h2><span>Про проект:</span> <br/>
+                                I-Met - розумний "нерозумний" лічильник
+                            </h2>
+                            <h4 class="m-top-40 col-lg-offset-1 first-letter"> Автоматизуйте подання та збір показників
+                                лічильників за допомогою датчика з камерою,
+                                який відсилає їх в відповідні установи щомісячно <br>(або навіть і щогодинно!)
+                                автоматично по мережі Wi-Fi.<br> Придбайте девайс,
+                                установіть його на лічильник будь-якого типу (єдина умова – наявність у лічильника
+                                дисплея з показниками) і насолоджуйтесь!
+                            </h4>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </figure>
+
+
+        <!-- Service Start -->
+        <section id="service" class="service  bg-white fix swing">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="service-title text-center">
+                            <h1><span>Наші переваги</span></h1>
+                        </div>
+                    </div>
+                    <div class="main-service text-center p-top-30">
+                        <div class="col-md-4">
+                            <div class="service-item bg-white alfa wow animated slideInLeft">
+                                <span class="icon_desktop"></span>
+                                <h3 class="m-top-30"> Веб-сайт </h3>
+                                <p class="m-top-20"> Будьте завжди в курсі змін показників лічильників.</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="service-item bg-white alfa wow animated slideInUp">
+                                <span class="icon_mobile"></span>
+                                <h3 class="m-top-30">Андроїд додаток</h3>
+                                <p class="m-top-20">Скористайтесь нашим додатком у будь якому куточку світу.</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="service-item bg-white alfa wow animated slideInRight">
+                                <span class=" icon_gift"></span>
+                                <h3 class="m-top-30">Автоматизація</h3>
+                                <p class="m-top-20">Подання показників лічильників швидко та автоматично.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section> <!-- End of Featured -->
+
+        <!-- Featured Start -->
+
+        <section id="featured" class="featured bg-grey p-bottom-40">
+            <div class="container">
+                <div class="row">
+                    <div class="main-featured sections2">
+                        <div class="col-md-5">
+                            <div class="featured-content wow animated slideInLeft">
+                                <h2 class="m-bottom-30">Про датчик</h2>
+                                <p class="m-top-20 m-bottom-30 first-letter">Наш пристрій складається з камери та модуля
+                                    передачі даних,
+                                    підходить для лічильників газу, води та світла і може самостійно зчитувати
+                                    показники,
+                                    розпізнавати їх і передавати по мережі Wi-Fi.</p>
+
+                            </div>
+                        </div>
+                        <div class="col-md-5 col-md-offset-2">
+
+                            <!-- Featured slider start -->
+                            <div class="featured-slide wow animated fadeIn">
+                                <div class="featured-items">
+                                    <div class="single-item">
+
+                                        <div class="slide">
+                                            <div class="f-item-text">
+                                                <h3>GLOBAL No 1</h3>
+                                                <h4>Provide visabule service</h4>
+                                            </div>
+                                            <img class="m-top-30"
+                                                 src="{{ url_for('static', filename='images/global-01.png') }}" alt=""/>
+
+                                            <div class="slide-count-wrap">
+                                                <span class="current"></span> /
+                                                <span class="total"></span>
+                                            </div>
+                                        </div><!-- End off f-slid-->
+
+                                        <div class="slide">
+                                            <div class="f-item-text">
+                                                <h3>GLOBAL No 2</h3>
+                                                <h4>Provide visabule service</h4>
+                                            </div>
+                                            <img class="m-top-30"
+                                                 src="{{ url_for('static', filename='images/global-01.png') }}" alt=""/>
+
+                                            <div class="slide-count-wrap">
+                                                <span class="current"></span> /
+                                                <span class="total"></span>
+                                            </div>
+                                        </div><!-- End off f-slid-->
+
+                                        <div class="slide">
+                                            <div class="f-item-text">
+                                                <h3>GLOBAL No 3</h3>
+                                                <h4>Provide visabule service</h4>
+                                            </div>
+                                            <img class="m-top-30"
+                                                 src="{{ url_for('static', filename='images/global-01.png') }}" alt=""/>
+
+                                            <div class="slide-count-wrap">
+                                                <span class="current"></span> /
+                                                <span class="total"></span>
+                                            </div>
+                                        </div><!-- End off f-slid-->
+
+                                        <div class="slide">
+                                            <div class="f-item-text">
+                                                <h3>GLOBAL No 4</h3>
+                                                <h4>Provide visabule service</h4>
+                                            </div>
+                                            <img class="m-top-30"
+                                                 src="{{ url_for('static', filename='images/global-01.png') }}" alt=""/>
+
+                                            <div class="slide-count-wrap">
+                                                <span class="current"></span> /
+                                                <span class="total"></span>
+                                            </div>
+                                        </div><!-- End off f-slid-->
+
+                                        <div class="slide">
+                                            <div class="f-item-text">
+                                                <h3>GLOBAL No 5</h3>
+                                                <h4>Provide visabule service</h4>
+                                            </div>
+                                            <img class="m-top-30"
+                                                 src="{{ url_for('static', filename='images/global-01.png') }}" alt=""/>
+
+                                            <div class="slide-count-wrap">
+                                                <span class="current"></span> /
+                                                <span class="total"></span>
+                                            </div>
+                                        </div><!-- End off f-slid-->
+
+                                    </div>
+                                </div>
+                            </div><!-- End of Featured slider -->
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section><!-- End off featured section -->
+
+
+        <!-- main product start-->
+        <div id="main-product" class="main-product m-top-70 m-bottom-30">
+
+            <div class="main-product-slid">
+                <div class="container">
+                    <div class="row">
+
+                        <!-- slider-warraper start-->
+                        <div class="col-md-7 m-bottom-30 product-slider alfa">
+                            <div class="slide-item">
+                                <div class="product-item">
+                                    <h2 class="text-center m-top-10">Про застосунок</h2>
+                                    <p class="m-top-30 first-letter">Шось треба придумати.Зручнийдуже і класний вообще
+                                        ми топ тіма))
+                                    </p>
+
+
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+
+            </div> <!-- end of main product -->
+
+            <!-- End of Product Section -->
+
+
+            <section id="pricing" class="pricing bg-grey m-bottom-30">
+                <div class="container">
+                    <div class="row">
+                        <h1 class="m-bottom-10 m-top-100 text-center">Вартість I-MET </h1>
+
+
+                        <div class="col-md-6">
+                            <div class="pricing-item text-center m-top-40 alfa bg-white m-bottom-30">
+                                <p class="catagory m-bottom-30">1 пристрій</p>
+                                <p class="price">₴<span class="statistic-counter">600</span></p>
+
+                                <p class="type m-top-20">Для одного лічильника</p>
+                                <p class="desc">Автомаизація</p>
+                                <p class="support">Цілодобова підтримка</p>
+
+
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="pricing-item text-center m-top-40 alfa bg-white m-bottom-30">
+                                <p class="catagory m-bottom-30">2 пристрої </p>
+                                <p class="price">₴<span class="statistic-counter">1100</span></p>
+
+                                <p class="type m-top-20">Для двох лічильників</p>
+                                <p class="desc">Автомаизація</p>
+                                <p class="support">Цілодобова підтримка</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section><!-- End off pricing section -->
+
+
+            <!--Brand section-->
+            <section id="partners" class="text-center sections3 bg-white p-bottom-90  wow animated slideInUp">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="head-title">
+                                <h2><span>Ми співпрацюємо з:</span></h2>
+                            </div>
+                        </div>
+                        <div class="main-brandv1 p-top-50">
+
+                            <div class="col-md-3 col-sm-3">
+                            </div>
+                            <div class="col-md-3 col-sm-3">
+                                <div class="brand-itemv1">
+                                    <a href="{{ url_for('index') }}"><img
+                                            src="{{ url_for('static', filename='images/lvivHaz.jpg') }}" alt=""/></a>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-sm-3 xs-m-top-20">
+                                <div class="brand-itemv1">
+                                    <a href="{{ url_for('index') }}"><img src="{{ url_for('static', filename='images/iot.png') }}"
+                                                              alt=""/></a>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-sm-3">
+                            </div>
+
+                        </div>
+                    </div><!-- End off row -->
+                </div><!-- End off container -->
+            </section><!-- End off brand section-->
+
+
+            <!-- Contact Info start-->
+            <section id="contacts" class="contact-info alfa fix m-top-40 bg-light">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <div class="contact-item text-center m-top-80">
+                                <span class="fa fa-phone"></span>
+
+                                <p>+380 970 486 635 </p>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="contact-item text-center m-top-80">
+                                <span class="fa fa-envelope-o"></span>
+                                <p>I-Met@name.com</p>
+
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="contact-item text-center m-top-80">
+                                <span class="fa fa-map-marker"></span>
+                                <p>Огіркова 11 м.Львів , Україна</p>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section><!-- Contact Info end-->
+
+            <!--Footer section-->
+            <footer class="footer bg-info p-top-20 p-bottom-30">
+
+
+                <div class="text-center">
+                    <h4 class="text-white">© I-Met</h4>
+                </div>
+
+            </footer><!-- End off footer Section-->
+
+        </div><!--End of home page style-->
+        <div class="scrollup">
+            <a href="{{ url_for('index') }}" class="hvr-hang"><span class="arrow_up"></span></a>
+        </div>
+        <!-- JS includes -->
+        <script src="{{ url_for('static', filename='js/vendor/jquery-1.11.2.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/vendor/bootstrap.js') }}"></script>
+
+        <script src="{{ url_for('static', filename='js/jquery.easing.1.3.js') }}"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.touchswipe/1.6.18/jquery.touchSwipe.min.js"></script>
+        <script src="{{ url_for('static', filename='js/bootsnav.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/jquery.formchimp.js') }}"></script>
+
+        <script src="{{ url_for('static', filename='js/plugins.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+        <script type="text/javascript">
+            /*---------------------------------------------*
+             * WOW
+             ---------------------------------------------*/
+
+            var wow = new WOW({
+                mobile: false // trigger animations on mobile devices (default is true)
+            });
+            wow.init();
+        </script>
+    </section>
+</div>
+</body>
+</html>
