@@ -275,6 +275,7 @@ def allowed_file(filename):
 
 UPLOAD_FOLDER = 'public-uploads'
 
+
 @application.route('/photo', methods=['GET', 'POST', 'DELETE'])
 def photo():
     f = request.files['image.bmp']
@@ -284,6 +285,13 @@ def photo():
         f.save(os.path.join(application.config['UPLOAD_FOLDER'], filename))
         # return Response('Uploaded file successfully', status=200)
     return redirect(url_for('meter'))
+
+
+@application.route('/get_photo', methods=['POST'])
+def get_photo():
+    f = request.get_data()
+    logging.ERROR(f)
+    return Response(status=200)
 
 
 @application.route('/update_data', methods=['PUT'])
