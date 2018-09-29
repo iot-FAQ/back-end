@@ -1,35 +1,35 @@
 import datetime
+import boto3, botocore
 
 import re
-# import logging
+import logging
 from logging.handlers import RotatingFileHandler
 
-import os
 from bson import ObjectId
-from flask import Flask, redirect, url_for, request, render_template, session, jsonify, json, logging, Response
+from flask import Flask, redirect, url_for, request, render_template, session, jsonify, json, Response
 from flask_pymongo import PyMongo
 from flask_bcrypt import Bcrypt
 from authy.api import AuthyApiClient
 from pymongo import MongoClient
 
 # from app import app, api, mongo, bcr
-from werkzeug.utils import secure_filename
 
-application = Flask(__name__)
-bcr = Bcrypt(application)
+app = Flask(__name__)
+bcr = Bcrypt(app)
 # client = MongoClient('localhost', 27017)    #Configure the connection to the database
 # db = client.i_Met
 
+app.config['JSON_SORT_KEYS'] = False
 
-application.config['MONGO_DBNAME'] = 'i-met'
-application.config['MONGO_URI'] = 'mongodb://Olga:olichka121@ds121289.mlab.com:21289/i-met'
-application.config['CONNECT'] = False
-application.config['maxPoolsize'] = 1
+app.config['MONGO_DBNAME'] = 'i-met'
+app.config['MONGO_URI'] = 'mongodb://Olga:olichka121@ds121289.mlab.com:21289/i-met'
+app.config['CONNECT'] = False
+app.config['maxPoolsize'] = 1
 
-mongo = PyMongo(application)
-application.config.from_object('config')
-api = AuthyApiClient(application.config['AUTHY_API_KEY'])
-application.secret_key = application.config['SECRET_KEY']
+mongo = PyMongo(app)
+app.config.from_object('config')
+api = AuthyApiClient(app.config['AUTHY_API_KEY'])
+app.secret_key = app.config['SECRET_KEY']
 
 now = datetime.datetime.now()
 curr_day = now.day
@@ -37,14 +37,14 @@ curr_month = now.month
 curr_year = now.year
 
 
-@application.route('/')
+@app.route('/')
 def index():
     if 'user' in session:
         return render_template('index.html', url=url_for('user_cabinet'), name='Кабінет')
     return render_template('index.html', url=url_for('login'), name='Увійти')
 
 
-@application.route('/login', methods=['POST', 'GET'])
+@app.route('/login', methods=['POST', 'GET'])
 def login():
     if 'user' in session:
         return redirect(url_for('user_cabinet'))
@@ -53,14 +53,6 @@ def login():
         login_user = user.find_one({'email': request.form['email']})
         if login_user:
             if bcr.check_password_hash(login_user['password'], request.form['password']):
-
-                # user.insert({'email': request.form['email'], 'password': hashpass,
-                #              'account_num': {'type': {'gas': {'3663434534': {
-                #                  'date': {'18': {'04': {'22': '100', '23': '150', '24': '200',
-                #                                         '25': '280'}}}}},
-                #                  'water': {'3663434534': {
-                #                      'date': {'18': {'04': {'22': '150', '23': '100', '24': '180',
-                #                                             '25': '140'}}}}}}}})
                 session['user'] = request.form['email']
                 return redirect(url_for('index'))
             else:
@@ -68,26 +60,27 @@ def login():
     return render_template('login-page.html')
 
 
-@application.route('/register', methods=['POST', 'GET'])
+@app.route('/register', methods=['POST', 'GET'])
 def register():
     if request.method == 'POST':
-        if request.form['buttons'] == 'sighup':
-            users = mongo.db.users
-            existing_user = users.find_one({'email': request.form['email']})
+        users = mongo.db.users
+        existing_user = users.find_one({'email': request.form['email']})
 
-            if existing_user is None:
-                hashpass = bcr.generate_password_hash(request.form['password']).decode('utf-8')
-                users.insert(
-                    {'email': request.form['email'], 'password': hashpass,
-                     'name': request.form['form-last-name'], 'surname': request.form['form-first-name']})
-                return redirect(url_for('index'))
+        if existing_user is None:
+            hashpass = bcr.generate_password_hash(request.form['password'])
+            users.insert(
+                {'email': request.form['email'], 'password': hashpass, 'name': request.form['first-name'],
+                 'surname': request.form['last-name'], 'phone': request.form['phone'], 'account_num':
+                     {'type': {request.form['type']: {request.form['counter-name']: {'date': {str(curr_year):
+                      {str(curr_month): {'month': '', str(curr_day): {}}}}}}}}})
+            return redirect(url_for('index'))
 
-            return 'That email already exists'
+        return 'That email already exists'
 
     return render_template('signup-page.html')
 
 
-@application.route('/user', methods=['POST', 'GET'])
+@app.route('/user', methods=['POST', 'GET'])
 def user():
     if request.method == 'POST':
         if request.form['exit'] == 'exit':
@@ -96,7 +89,7 @@ def user():
     return render_template('user.html')
 
 
-@application.route('/user_cabinet', methods=['POST', 'GET'])
+@app.route('/user_cabinet', methods=['POST', 'GET'])
 def user_cabinet():
     if request.method == 'POST':
         if request.form['exit'] == 'exit':
@@ -118,7 +111,7 @@ def user_cabinet():
     return render_template('user-cabinet.html', values_water=values_water, values_gas=values_gas, labels=labels)
 
 
-@application.route('/gas', methods=['POST', 'GET'])
+@app.route('/gas', methods=['POST', 'GET'])
 def gas():
     if request.method == 'POST':
         if request.form['exit'] == 'exit':
@@ -133,7 +126,7 @@ def gas():
     return render_template('gas.html', values=values, labels=labels)
 
 
-@application.route('/water', methods=['POST', 'GET'])
+@app.route('/water', methods=['POST', 'GET'])
 def water():
     if request.method == 'POST':
         if request.form['exit'] == 'exit':
@@ -153,12 +146,7 @@ def logout():
     return session.pop('user', None)
 
 
-@application.route('/meter')
-def meter():
-    return render_template('meter.html')
-
-
-@application.route('/check_user', methods=['GET'])
+@app.route('/check_user', methods=['GET'])
 def check_user():
     users = mongo.db.users
     query_parameters = request.args
@@ -175,7 +163,7 @@ def check_user():
     return 'Cannot find this email'
 
 
-@application.route('/get_data', methods=['GET'])
+@app.route('/get_data', methods=['GET'])
 def get_data(email_par=None, type_par=None, counter_par=None, year_par=None, month_par=None, week_par=None):
     users = mongo.db.users
     query_parameters = request.args
@@ -226,7 +214,7 @@ def get_data(email_par=None, type_par=None, counter_par=None, year_par=None, mon
         if (email_par and type_par and counter_par) is not None:
             return month
         else:
-            return json.dumps(month)
+            return jsonify(month)
     elif query_parameters.get('year') or year_par:
         year = user['account_num']['type'][type][counter]['date'][str(curr_year)]
         month = {month: year[str(month)]['month'] for month in year}
@@ -237,7 +225,7 @@ def get_data(email_par=None, type_par=None, counter_par=None, year_par=None, mon
     return jsonify('Error')
 
 
-@application.route('/send_photo', methods=['POST'])
+@app.route('/send_photo', methods=['POST'])
 def send_photo():
     users = mongo.db.users
     query_parameters = request.args
@@ -245,56 +233,64 @@ def send_photo():
     email = query_parameters.get('email')
     type = query_parameters.get('type')
     counter = query_parameters.get('counter')
-    photo = query_parameters.get('photo')
 
     user = users.find_one({'email': email})
     month = 'account_num.type.' + type + '.' + counter + '.date.' + str(curr_year) + '.' + str(curr_month)
-    value = '300'
-    sum_month = int(
-        user['account_num']['type'][type][counter]['date'][str(curr_year)][str(curr_month)]['month'] or 0) + int(value)
+    value = '270'
+
+    from config import S3_KEY, S3_SECRET, S3_BUCKET
+
+    S3_LOCATION = str(email) + '/' + str(type) + '/' + str(counter) + '/'
+    s3 = boto3.resource('s3', aws_access_key_id=S3_KEY, aws_secret_access_key=S3_SECRET)
+    s3.Object(S3_BUCKET, S3_LOCATION + str(now.year) + '-' + str(now.month) + '-' + str(now.day) + '.bmp').put(Body=request.data, ACL="public-read")
+
     id = user['_id']
-    if query_parameters.get('photo'):
-        users.update({
+    users.update({
             '_id': ObjectId(id)
         }, {
             '$set': {
-                month + ".month": str(sum_month),
                 month + '.' + str(curr_day): {
-                    str(value): photo
+                    str(value): 'https://' + S3_BUCKET + '.s3.amazonaws.com/' + S3_LOCATION + str(now.year) + '-' + str(now.month) + '-' + str(now.day) + '.bmp'
                 }
             }
         })
-        return jsonify('Success')
-    else:
-        return jsonify("Error via sending photo")
+    return Response('Uploaded file successfully', status=200)
 
 
-def allowed_file(filename):
-    return '.' in filename and \
-           filename.rsplit('.', 1)[1]
-
-UPLOAD_FOLDER = 'public-uploads'
-
-
-@application.route('/photo', methods=['GET', 'POST', 'DELETE'])
-def photo():
-    f = request.files['image.bmp']
-    if f and allowed_file(f.filename):
-        absolute_file = os.path.abspath('static' + f.filename)
-        filename = secure_filename(absolute_file)
-        f.save(os.path.join(application.config['UPLOAD_FOLDER'], filename))
-        # return Response('Uploaded file successfully', status=200)
-    return redirect(url_for('meter'))
-
-
-@application.route('/get_photo', methods=['POST'])
+@app.route('/get_photo', methods=['GET'])
 def get_photo():
-    f = request.get_data()
-    logging.ERROR(f)
-    return Response(status=200)
+    # sum_month = int(
+    #     user['account_num']['type'][type][counter]['date'][str(curr_year)][str(curr_month)]['month'] or 0) + int(value)
+    # id = user['_id']
+    # if query_parameters.get('photo'):
+    #     users.update({
+    #         '_id': ObjectId(id)
+    #     }, {
+    #         '$set': {
+    #             month + ".month": str(sum_month),
+    #             month + '.' + str(curr_day): {
+    #                 str(value): request.data
+    #             }
+    #         }
+    #     })
+
+        import io
+        import requests
+        from PIL import Image
+
+        response = requests.get('https://i-met.s3.amazonaws.com/alex@gmail.com/gas/3663434534/2018-9-29.bmp')
+        image = Image.open(io.BytesIO(response.content))
+        image.save("image.bmp")
+
+        return jsonify('Success')
+
+	
+@app.route('/meter')
+def meter():
+    return render_template('meter.html')
 
 
-@application.route('/update_data', methods=['PUT'])
+@app.route('/update_data', methods=['PUT'])
 def update_data():
     users = mongo.db.users
     query_parameters = request.args
@@ -311,8 +307,7 @@ if __name__ == '__main__':
     logHandler.setLevel(logging.DEBUG)
 
     # set the app logger level
-    application.logger.setLevel(logging.DEBUG)
+    app.logger.setLevel(logging.DEBUG)
 
-    application.logger.addHandler(logHandler)
-    application.run(debug=True)
-
+    app.logger.addHandler(logHandler)
+    app.run(debug=True)
