@@ -259,6 +259,24 @@ def update_data():
     user = users.find_one({'email': email})
     return True
 
+@application.route('/devices', methods=['GET'])
+def get_all_devices():
+  users = mongo.db.users
+  output = []
+  for s in users.find():
+    output.append({'email' : s['email'], 'account_num' : s['account_num']})
+  return jsonify({'user devices' : output})
+
+@application.route('/devices/<email>', methods=['GET'])
+def get_one_device(email):
+  users = mongo.db.users
+  s = users.find_one({'email' : email})
+  if s:
+    output = {'email' : s['email'], 'account_num' : s['account_num']}
+  else:
+    output = "No such email"
+  return jsonify({'user devices' : output})
+
 
 if __name__ == '__main__':
     application.run(debug=True)
